@@ -1,4 +1,10 @@
 ---
 # Install mysql
-- name: Install MySQL
-  debug: msg="Install MySQL"
+- name: Install packages for MySQL
+  apt: name={{ item }} state=present update_cache=yes
+  sudo: yes
+  with_items:
+  - mysql-server
+  - mysql-client
+  - libmysqlclient-dev
+  - python-mysqldb
