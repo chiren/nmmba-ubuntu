@@ -12,6 +12,7 @@
   vars:
     home: "/home/vagrant"
     ruby_latest_version: 2.2.2
+    rails_latest_version: 4.2.3
   roles:
     - rails
 

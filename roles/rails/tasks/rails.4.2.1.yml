@@ -1,4 +1,0 @@
----
-# Install rails 4.2.1
-- name: Install Rails 4.2.1
-  debug: msg="Install Rails 4.2.1"
