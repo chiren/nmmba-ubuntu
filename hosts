@@ -5,10 +5,10 @@
 #192.168.100.42   ansible_ssh_user=vagrant     ansible_ssh_pass=vagrant  ansible_sudo_pass=vagrant
 
 [db]
-192.168.100.42   ansible_ssh_user=vagrant     ansible_ssh_pass=vagrant  ansible_sudo_pass=vagrant
+#192.168.100.42   ansible_ssh_user=vagrant     ansible_ssh_pass=vagrant  ansible_sudo_pass=vagrant
 
 [cache]
-#192.168.100.42   ansible_ssh_user=vagrant     ansible_ssh_pass=vagrant  ansible_sudo_pass=vagrant
+192.168.100.42   ansible_ssh_user=vagrant     ansible_ssh_pass=vagrant  ansible_sudo_pass=vagrant
 
 [nodejs]
 #192.168.100.42   ansible_ssh_user=vagrant     ansible_ssh_pass=vagrant  ansible_sudo_pass=vagrant
