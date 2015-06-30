@@ -28,6 +28,9 @@
 
 - name: Install nodejs
   hosts: nodejs
+  vars:
+    home: "/home/vagrant"
+    node_latest_version: 0.12.4
   roles:
     - nodejs
 
