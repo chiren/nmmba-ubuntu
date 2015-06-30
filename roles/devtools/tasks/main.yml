@@ -1,3 +1,3 @@
 ---
 - include: tmux.yml
-- include: muxinator.yml
+- include: tmuxinator.yml

@@ -1,4 +1,13 @@
 ---
 # Install tmux
-- name: Install tmux
-  debug: msg="Install tmux"
+- name: Copy .tmux.conf
+  copy: src=tmux.conf dest="{{ home }}/.tmux.conf"
+
+- name: Copy .vimrc
+  copy: src=vimrc dest="{{ home }}/.vimrc"
+
+- name: Install tmux using apt
+  apt: name={{ item }} state=present update_cache=yes force=yes
+  sudo: yes
+  with_items:
+    - tmux
