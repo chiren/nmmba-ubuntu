@@ -1,0 +1,35 @@
+---
+
+- name: Installing common packages
+  hosts: common
+  vars:
+    home: "/home/vagrant"
+  roles:
+    - common
+
+- name: Install Ruby and Rails
+  hosts: rails
+  roles:
+    - rails
+
+- name: Install Database (MySQL and MongoDB)
+  hosts: db
+  roles:
+    - db
+
+- name: Install Cache Server (Redis)
+  hosts: cache
+  roles:
+    - cache
+
+- name: Install nodejs
+  hosts: nodejs
+  roles:
+    - nodejs
+
+- name: Install Development tools
+  hosts: dev
+  vars:
+    home: "/home/vagrant"
+  roles:
+    - devtools

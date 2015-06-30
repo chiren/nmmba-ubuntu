@@ -1,0 +1,4 @@
+---
+# Install mysql
+- name: Install MySQL
+  debug: msg="Install MySQL"

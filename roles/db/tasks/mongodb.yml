@@ -1,0 +1,4 @@
+---
+# Install mongodb
+- name: Install MongoDB
+  debug: msg="Install MongoDB"

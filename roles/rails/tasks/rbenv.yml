@@ -1,0 +1,4 @@
+---
+# Install rbenv
+- name: Install rbenv
+  debug: msg="Install rbenv"

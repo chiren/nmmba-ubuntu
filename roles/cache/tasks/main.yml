@@ -1,0 +1,4 @@
+---
+# Install Redis cache server
+- name: Install Redis
+  debug: msg="Install Redis"

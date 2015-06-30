@@ -1,0 +1,4 @@
+---
+# Install nodejs
+- name: Install nodejs
+  debug: msg="Install nodejs"

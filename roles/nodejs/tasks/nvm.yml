@@ -1,0 +1,4 @@
+---
+# Install nvm
+- name: Install nvm
+  debug: msg="Install nvm"

@@ -1,0 +1,4 @@
+---
+# Install muxinator
+- name: Install muxinator
+  debug: msg="Install muxinator"

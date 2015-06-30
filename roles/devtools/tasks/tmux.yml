@@ -1,0 +1,4 @@
+---
+# Install tmux
+- name: Install tmux
+  debug: msg="Install tmux"
