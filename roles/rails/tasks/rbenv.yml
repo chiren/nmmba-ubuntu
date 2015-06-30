@@ -1,4 +1,52 @@
 ---
-# Install rbenv
-- name: Install rbenv
-  debug: msg="Install rbenv"
+# These tasks install rbenv
+
+- name: rbenv | check rbenv installed
+  command: test -x {{ home }}/.rbenv/bin/rbenv
+  register: rbenv_present
+  ignore_errors: yes
+  
+- name: rbenv | update rbenv repo
+  git: repo=git://github.com/sstephenson/rbenv.git dest="{{ home }}/.rbenv/" accept_hostkey=yes
+  when: rbenv_present | failed
+  ignore_errors: yes 
+
+- name: rbenv | modify .bash_profile
+  lineinfile: dest="{{ home }}/.bash_profile" line='{{ item }}' create=yes
+  with_items:
+    - export PATH="$HOME/.rbenv/bin:$PATH"
+    - eval "$(rbenv init -)"
+  when: rbenv_present | failed
+
+- name: ruby-build | check ruby-build installed
+  command: test -x {{ home }}/.rbenv/plugins/ruby-build/bin/ruby-build
+  register: ruby_build_present
+  ignore_errors: yes
+  
+- name: ruby-build | update ruby-build repo
+  git: repo=git://github.com/sstephenson/ruby-build.git dest="{{ home }}/.rbenv/plugins/ruby-build/" accept_hostkey=yes
+  when: ruby_build_present | failed
+  ignore_errors: yes 
+
+- name: ruby-build | modify .bash_profile
+  lineinfile: dest="{{ home }}/.bash_profile" line='{{ item }}'
+  with_items:
+    - export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+- name: rbenv | install Ruby {{ ruby_latest_version }}
+  shell: ". {{ home }}/.bash_profile && rbenv install {{ruby_latest_version}}"
+  when: rbenv_present | failed
+
+- name: Setting Ruby global version to {{ ruby_latest_version }}
+  shell: ". {{ home }}/.bash_profile && rbenv global {{ ruby_latest_version }}"
+#  when: rbenv_present | failed
+
+- name: list installed Ruby versions
+  shell: ". {{ home }}/.bash_profile && rbenv versions"
+  register: ruby_versions
+- debug: var=ruby_versions
+
+- name: rbenv | modify .gemrc not to install local doc
+  lineinfile: dest="{{ home }}/.gemrc" line='{{ item }}' create=yes
+  with_items:
+    - 'gem: --no-ri --no-rdoc'

@@ -9,6 +9,9 @@
 
 - name: Install Ruby and Rails
   hosts: rails
+  vars:
+    home: "/home/vagrant"
+    ruby_latest_version: 2.2.2
   roles:
     - rails
 
