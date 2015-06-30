@@ -30,7 +30,7 @@
   hosts: nodejs
   vars:
     home: "/home/vagrant"
-    node_latest_version: 0.12.4
+    node_version: 0.12.5
   roles:
     - nodejs
 
