@@ -11,8 +11,11 @@
   when: rbenv_present | failed
   ignore_errors: yes 
 
-- name: rbenv | modify .bash_profile
-  lineinfile: dest="{{ home }}/.bash_profile" line='{{ item }}' create=yes
+- name: Copy .profile
+  copy: src=profile dest="{{ home }}/.profile"
+
+- name: rbenv | modify .profile
+  lineinfile: dest="{{ home }}/.profile" line='{{ item }}' create=yes
   with_items:
     - export PATH="$HOME/.rbenv/bin:$PATH"
     - eval "$(rbenv init -)"
@@ -28,21 +31,25 @@
   when: ruby_build_present | failed
   ignore_errors: yes 
 
-- name: ruby-build | modify .bash_profile
-  lineinfile: dest="{{ home }}/.bash_profile" line='{{ item }}'
+- name: ruby-build | modify .profile
+  lineinfile: dest="{{ home }}/.profile" line='{{ item }}'
   with_items:
     - export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 - name: rbenv | install Ruby {{ ruby_latest_version }}
-  shell: ". {{ home }}/.bash_profile && rbenv install {{ruby_latest_version}}"
+  shell: ". {{ home }}/.profile && rbenv install {{ruby_latest_version}}"
   when: rbenv_present | failed
 
-- name: Setting Ruby global version to {{ ruby_latest_version }}
-  shell: ". {{ home }}/.bash_profile && rbenv global {{ ruby_latest_version }}"
+- name: "Setting Ruby global version to {{ ruby_latest_version }}"
+  shell: ". {{ home }}/.profile && rbenv global {{ ruby_latest_version }}"
+#  when: rbenv_present | failed
+
+- name: Setting Ruby local version to system
+  shell: ". {{ home }}/.profile && cd {{ home }}/projects/Rails/podcast3 && rbenv local system"
 #  when: rbenv_present | failed
 
 - name: list installed Ruby versions
-  shell: ". {{ home }}/.bash_profile && rbenv versions"
+  shell: ". {{ home }}/.profile && rbenv versions"
   register: ruby_versions
 - debug: var=ruby_versions
 

@@ -7,15 +7,15 @@
   ignore_errors: yes
   
 - name: install version {{rails_latest_version}}
-  shell: ". {{ home }}/.bash_profile && gem install rails -v {{ rails_latest_version }}"
+  shell: ". {{ home }}/.profile && gem install rails -v {{ rails_latest_version }}"
   when: rails_present | failed
 
 - name: rebuild the shim binaries
-  shell: ". {{ home }}/.bash_profile && rbenv rehash"
+  shell: ". {{ home }}/.profile && rbenv rehash"
   when: rails_present | failed
 
 - name: list installed Rails versions
-  shell: ". {{ home }}/.bash_profile && rails -v"
+  shell: ". {{ home }}/.profile && rails -v"
   register: rails_versions
 - debug: var=rails_versions
 

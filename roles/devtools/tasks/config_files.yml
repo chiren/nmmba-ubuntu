@@ -1,0 +1,13 @@
+---
+- name: Copy .tmux.conf
+  copy: src=tmux.conf dest="{{ home }}/.tmux.conf"
+
+- name: Copy .vimrc
+  copy: src=vimrc dest="{{ home }}/.vimrc"
+
+- name: Copy config files
+  copy: src={{ item }} dest="{{ home }}/.bin/"
+  with_items:
+    - git-completion.bash
+    - git-prompt.sh
+    - tmuxinator.bash
