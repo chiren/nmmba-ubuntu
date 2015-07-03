@@ -19,6 +19,7 @@
     - libcurl4-openssl-dev 
     - python-software-properties
     - tree
+    - vim
     - ruby-dev
 
 - name: Setting git config global by copying gitconfig to hosts
